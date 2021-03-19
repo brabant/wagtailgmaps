@@ -83,15 +83,22 @@ $(document).ready(function() {
 
   // Method to initialize a map and all of its related components (usually address input and marker)
   window.initialize_map = function (params) {
-
-      // Get latlong form address to initialize map
-      geocoder.geocode( { "address": params.address}, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-          set_address({}, results[0].geometry.location, params.map_id, params.map_id, params.zoom, params.latlng, {}, {});
-        } else {
-          alert("Geocode was not successful for the following reason: " + status);
-        }
-      });
+      if ( params.latlng) {
+          var  coords = params.address.split(', ');
+          if (coords.length == 2) {
+              address = {lat: parseFloat(coords[0]), lng: parseFloat(coords[1])};
+              set_address({}, address, params.map_id, params.map_id, params.zoom, params.latlng, {}, {});
+          }
+      } else {
+          // Get latlong form address to initialize map
+          geocoder.geocode({"address": params.address}, function (results, status) {
+              if (status == google.maps.GeocoderStatus.OK) {
+                  set_address({}, results[0].geometry.location, params.map_id, params.map_id, params.zoom, params.latlng, {}, {});
+              } else {
+                  alert("Geocode was not successful for the following reason: " + status);
+              }
+          });
+      }
 
   };
 
