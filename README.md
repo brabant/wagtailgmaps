@@ -1,3 +1,5 @@
+# It differs from the original version in that in the "'latlng' - Field returns LatLng instead of address" mode, it does not distort the coordinates of the marker on the map.
+
 # wagtailgmaps [![PyPI](https://img.shields.io/pypi/v/wagtailgmaps.svg)](https://pypi.python.org/pypi/wagtailgmaps)
 
 > Simple Google Maps address formatter and LatLng provider for [Wagtail](https://wagtail.io/) fields.
