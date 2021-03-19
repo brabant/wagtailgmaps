@@ -5,22 +5,20 @@ $(document).ready(function() {
 
   // Get formatted address from LatLong position
   function geocodePosition(pos, input, latlngMode) {
-    geocoder.geocode({
-      latLng: pos
-    }, function(responses) {
-      if (responses && responses.length > 0) {
-          $input = $(input);
-          if (latlngMode) {
-            $input.val(
-              String(responses[0].geometry.location.lat()) + ', ' + String(responses[0].geometry.location.lng())
-            );
-          } else {
-            $input.val(responses[0].formatted_address);
-          }
-      } else {
-        alert('Cannot determine address at this location.');
-      }
-    });
+    if(latlngMode) {
+        $input.val(pos.lat() + ', ' + pos.lng());
+    } else {
+        geocoder.geocode({
+            latLng: pos
+        }, function (responses) {
+            if (responses && responses.length > 0) {
+                $input = $(input);
+                    $input.val(responses[0].formatted_address);
+            } else {
+                alert('Cannot determine address at this location.');
+            }
+        });
+    }
   }
 
   // Get LatLong position and formatted address from inaccurate address string
