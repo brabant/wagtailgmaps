@@ -6,7 +6,7 @@ $(document).ready(function() {
   // Get formatted address from LatLong position
   function geocodePosition(pos, input, latlngMode) {
     if(latlngMode) {
-        $input.val(pos.lat() + ', ' + pos.lng());
+        $(input).val(pos.lat() + ', ' + pos.lng());
     } else {
         geocoder.geocode({
             latLng: pos
